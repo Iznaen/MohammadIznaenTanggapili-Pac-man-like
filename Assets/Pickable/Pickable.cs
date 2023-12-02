@@ -19,7 +19,7 @@ public class Pickable : MonoBehaviour
         // check tag, only execute if an object tagged with "Player" are colliding
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"Pickup: {pickableType}");
+            //$Debug.Log($"Pickup: {pickableType}");
 
             // calling the field 'onPicked' that will also call the OnPickablePicked() method
             onPicked(this);

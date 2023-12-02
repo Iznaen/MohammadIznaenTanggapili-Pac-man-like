@@ -25,7 +25,7 @@ public class PickableManager : MonoBehaviour
             pickableObjects[i].onPicked += OnPickablePicked;
         }
 
-        Debug.Log($"Pickable List: {_pickableList.Count}");
+        //$Debug.Log($"Pickable List: {_pickableList.Count}");
     }
 
     private void OnPickablePicked(Pickable pickable)
@@ -34,7 +34,7 @@ public class PickableManager : MonoBehaviour
         _pickableList.Remove(pickable);
 
         // update the pickable count inside the log if a pickableObject has been picked
-        Debug.Log($"Pickable List: {_pickableList.Count}");
+        //$Debug.Log($"Pickable List: {_pickableList.Count}");
 
         if (_pickableList.Count <= 0)
         {
