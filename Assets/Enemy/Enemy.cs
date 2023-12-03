@@ -57,6 +57,17 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    private void Start()
+    {
+        if (player != null)
+        {
+            // accessing player power-up status via field type: Action
+            // add each retreat condition based on the power-up status
+            player.onPowerUpStart += StartRetreating;
+            player.onPowerUpStop += StopRetreating;
+        }
+    }
+
     private void Update()
     {
         currentDistance = Vector3.Distance(transform.position, player.transform.position);
@@ -67,5 +78,15 @@ public class Enemy : MonoBehaviour
         }
 
         //$Debug.Log(currentDistance);
+    }
+
+    private void StartRetreating()
+    {
+        SwitchState(retreatState);
+    }
+
+    private void StopRetreating()
+    {
+        SwitchState(patrolState);
     }
 }

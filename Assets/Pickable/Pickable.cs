@@ -5,7 +5,7 @@ public class Pickable : MonoBehaviour
 {
     // Attach the type PickableType to the Inspector
     [SerializeField]
-    private PickableType pickableType;
+    public PickableType pickableType;
 
     // using the 'Action' field type with generic <Pickable>
     // to call the method OnPickablePicked() inside this script

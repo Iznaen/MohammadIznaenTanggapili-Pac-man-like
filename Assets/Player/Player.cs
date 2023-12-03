@@ -1,8 +1,13 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody _rigidBody;
+    // using field type: Action to access the methods
+    // from Enemy.cs
+    public Action onPowerUpStart;
+    public Action onPowerUpStop;
 
     [SerializeField]
     private float _speed;
@@ -10,6 +15,47 @@ public class Player : MonoBehaviour
     // accessing Camera method and reference it into Player object
     [SerializeField]
     private Camera _camera;
+
+    [SerializeField]
+    private float _powerUpDuration;
+
+    // using Coroutine field to call IEnumerator [StartPowerUp()] method
+    private Coroutine _powerUpCoroutine;
+
+    private Rigidbody _rigidBody;
+
+    // method to determine if player has pick or has not pick
+    // the power-up
+    public void PickPowerUp()
+    {
+        Debug.Log("Pick Power-up!");
+
+        if (_powerUpCoroutine != null)
+        {
+            StopCoroutine(_powerUpCoroutine);
+        }
+
+        _powerUpCoroutine = StartCoroutine(StartPowerUp());
+    }
+
+    // method to count the seconds of how long the power-up
+    // should be active
+    private IEnumerator StartPowerUp()
+    {
+        if (onPowerUpStart != null)
+        {
+            onPowerUpStart();
+            Debug.Log("Start Power-up!");
+        }
+
+        yield return new WaitForSeconds(_powerUpDuration);
+
+        if (onPowerUpStop != null)
+        {
+            onPowerUpStop();
+            Debug.Log("Power-up has stopped.");
+        }
+    }
 
     // pre-load all the functions before the game start
     private void Awake()
