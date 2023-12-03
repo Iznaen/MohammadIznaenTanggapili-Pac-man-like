@@ -8,6 +8,18 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public List<Transform> Waypoints = new List<Transform>();
 
+    // store distance to trigger ChaseState
+    [SerializeField]
+    public float chaseDistance;
+
+    // store player transform position
+    [SerializeField]
+    public Player player;
+
+    // store current distance between player and enemy
+    [HideInInspector]
+    public float currentDistance;
+
     // storing what is the current state of the Enemy AI
     private BaseState _currentState;
 
@@ -27,7 +39,14 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
-    
+    // a method to switch state
+    public void SwitchState(BaseState state)
+    {
+        _currentState.ExitState(this);
+        _currentState = state;
+        _currentState.EnterState(this);
+    }
+
     private void Awake()
     {
         // defining what is the initial state when the GameObject loaded
@@ -40,9 +59,13 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        currentDistance = Vector3.Distance(transform.position, player.transform.position);
+
         if (_currentState != null)
         {
             _currentState.UpdateState(this);
         }
+
+        //$Debug.Log(currentDistance);
     }
 }

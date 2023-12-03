@@ -14,6 +14,12 @@ public class PatrolState : BaseState
 
     public void UpdateState(Enemy enemy)
     {
+        // switch to patrol state if conditions met
+        if (enemy.currentDistance < enemy.chaseDistance)
+        {
+            enemy.SwitchState(enemy.chaseState);
+        }
+
         if (!_isMoving)
         {
             _isMoving = true;
@@ -33,7 +39,7 @@ public class PatrolState : BaseState
         else
         {
             // check if enemy position and destination position is LE 0.1
-            // if true then enemy reach is destination set _isMoving to false
+            // if true then enemy reach its destination set _isMoving to false
             if (Vector3.Distance(_destination, enemy.transform.position) <= 0.1)
             {
                 _isMoving = false;
