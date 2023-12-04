@@ -6,6 +6,11 @@ public class RetreatState : BaseState
 
     public void EnterState(Enemy enemy)
     {
+        // trigger condition for animation from the controller
+        // using [SetTrigger] because the parameter was a 'Trigger' type
+        // not 'Bool' or 'Int' type
+        enemy.animator.SetTrigger("RetreatState");
+
         Debug.Log("Starting retreat");
     }
 

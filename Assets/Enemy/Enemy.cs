@@ -39,6 +39,11 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public NavMeshAgent navMeshAgent;
 
+    // accessing animator component inside enemy object
+    // through this field
+    [HideInInspector]
+    public Animator animator;
+
     // a method to switch state
     public void SwitchState(BaseState state)
     {
@@ -49,11 +54,15 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        // get component from Animator store into animator field
+        animator = GetComponent<Animator>();
+
         // defining what is the initial state when the GameObject loaded
         _currentState = patrolState;
 
         _currentState.EnterState(this);
 
+        // get component from NavMeshAgent store into navMeshAgent field
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 

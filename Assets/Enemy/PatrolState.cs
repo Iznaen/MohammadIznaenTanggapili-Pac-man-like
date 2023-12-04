@@ -9,6 +9,11 @@ public class PatrolState : BaseState
     {
         _isMoving = false;
 
+        // trigger condition for animation from the controller
+        // using [SetTrigger] because the parameter was a 'Trigger' type
+        // not 'Bool' or 'Int' type
+        enemy.animator.SetTrigger("PatrolState");
+
         //$Debug.Log("Starting patrol");
     }
 

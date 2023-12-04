@@ -5947,7 +5947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366017766}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4575816, y: 0.000000015299362, z: -0.000000007873326, w: 0.88916767}
+  m_LocalRotation: {x: 0.4575816, y: -0.000000015299355, z: 0.000000007873323, w: 0.88916767}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7143,7 +7143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570526784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4249806, y: 3.5282766e-15, z: -2.1202353e-15, w: 0.90520245}
+  m_LocalRotation: {x: 0.4249806, y: -7.417779e-15, z: 4.1631144e-15, w: 0.90520245}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9269,7 +9269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.45758158, y: 0.000000040478294, z: -0.000000020830855, w: 0.88916767}
+  m_LocalRotation: {x: 0.45758158, y: -0.00000004047829, z: 0.000000020830853, w: 0.88916767}
   m_LocalPosition: {x: 0, y: 4.5, z: -14.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12838,6 +12838,7 @@ GameObject:
   - component: {fileID: 2083960857}
   - component: {fileID: 2083960860}
   - component: {fileID: 2083960861}
+  - component: {fileID: 2083960862}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -12956,6 +12957,27 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &2083960862
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083960855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8dc667866767ddef485a448d5b4c3e92, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!43 &2110089965
 Mesh:
   m_ObjectHideFlags: 0
