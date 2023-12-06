@@ -8,6 +8,10 @@ public class PickableManager : MonoBehaviour
     [SerializeField]
     private Player _player;
 
+    // accessing ScoreManager.cs
+    [SerializeField]
+    private ScoreManager _scoreManager;
+
     private List<Pickable> _pickableList = new List<Pickable>();
 
     void Start()
@@ -30,7 +34,13 @@ public class PickableManager : MonoBehaviour
             pickableObjects[i].onPicked += OnPickablePicked;
         }
 
-        //$Debug.Log($"Pickable List: {_pickableList.Count}");
+        // call SetMaxScore() from ScoreManager.cs using the
+        // [private ScoreManager _scoreManager] field type
+        // passing the argument [_pickableList.count] to get
+        // all the pickable inside the scene
+        _scoreManager.SetMaxScore(_pickableList.Count);
+
+        Debug.Log($"Pickable List: {_pickableList.Count}");
     }
 
     private void OnPickablePicked(Pickable pickable)
@@ -40,6 +50,12 @@ public class PickableManager : MonoBehaviour
 
         // update the pickable count inside the log if a pickableObject has been picked
         //$Debug.Log($"Pickable List: {_pickableList.Count}");
+
+        // add score +1 if player pickup pickable
+        if (_scoreManager != null)
+        {
+            _scoreManager.AddScore(1);
+        }
 
         // check if the player pick-up a power up type or not
         // if true, call PickPowerUp()

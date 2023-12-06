@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -16,13 +17,41 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    private bool _isPowerUpActive = false;
+
     [SerializeField]
     private float _powerUpDuration;
+
+    [SerializeField]
+    private int _health;
+
+    [SerializeField]
+    private TMP_Text _healthText;
+
+    [SerializeField]
+    private Transform _respawnPoint;
 
     // using Coroutine field to call IEnumerator [StartPowerUp()] method
     private Coroutine _powerUpCoroutine;
 
     private Rigidbody _rigidBody;
+
+    public void Dead()
+    {
+        _health--;
+
+        if (_health > 0)
+        {
+            transform.position = _respawnPoint.transform.position;
+        }
+        else
+        {
+            _health = 0;
+            Debug.Log("You lose :(");
+        }
+
+        UpdateHealth();
+    }
 
     // method to determine if player has pick or has not pick
     // the power-up
@@ -44,6 +73,7 @@ public class Player : MonoBehaviour
     {
         if (onPowerUpStart != null)
         {
+            _isPowerUpActive = true;
             onPowerUpStart();
             Debug.Log("Start Power-up!");
         }
@@ -52,6 +82,7 @@ public class Player : MonoBehaviour
 
         if (onPowerUpStop != null)
         {
+            _isPowerUpActive = false;
             onPowerUpStop();
             Debug.Log("Power-up has stopped.");
         }
@@ -60,6 +91,7 @@ public class Player : MonoBehaviour
     // pre-load all the functions before the game start
     private void Awake()
     {
+        UpdateHealth();
         _rigidBody = GetComponent<Rigidbody>();
         HideAndLockCursor();
     }
@@ -97,5 +129,24 @@ public class Player : MonoBehaviour
 
         //>Debug.Log("Horizontal: " + horizontal);
         //>Debug.Log("Vertical: " + vertical);
+    }
+
+    // check collision with enemy
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_isPowerUpActive == true)
+        {
+            // call Dead() from enemy if collide with enemy
+            // while power up active
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<Enemy>().Dead();
+            }
+        }
+    }
+
+    private void UpdateHealth()
+    {
+        _healthText.text = "Health: " + _health;
     }
 }

@@ -52,6 +52,12 @@ public class Enemy : MonoBehaviour
         _currentState.EnterState(this);
     }
 
+    // kill enemy
+    public void Dead()
+    {
+        Destroy(gameObject);
+    }
+
     private void Awake()
     {
         // get component from Animator store into animator field
@@ -97,5 +103,17 @@ public class Enemy : MonoBehaviour
     private void StopRetreating()
     {
         SwitchState(patrolState);
+    }
+
+    // enemy kill player
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_currentState != retreatState)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<Player>().Dead();
+            }
+        }
     }
 }
