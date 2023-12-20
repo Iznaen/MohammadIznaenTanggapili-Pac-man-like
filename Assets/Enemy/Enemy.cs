@@ -97,12 +97,18 @@ public class Enemy : MonoBehaviour
 
     private void StartRetreating()
     {
-        SwitchState(retreatState);
+        if (gameObject != null)
+        {
+            SwitchState(retreatState);
+        }
     }
 
     private void StopRetreating()
     {
-        SwitchState(patrolState);
+        if (gameObject != null)
+        {
+            SwitchState(patrolState);
+        }
     }
 
     // enemy kill player
